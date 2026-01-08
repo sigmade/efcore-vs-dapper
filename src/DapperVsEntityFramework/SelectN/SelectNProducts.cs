@@ -1,5 +1,4 @@
-using System.Data;
-using System.Runtime.CompilerServices;
+﻿using System.Data;
 using BenchmarkDotNet.Attributes;
 using Dapper;
 using DapperVsEntityFramework.Common;
@@ -10,7 +9,8 @@ namespace DapperVsEntityFramework.SelectN;
 [MemoryDiagnoser(displayGenColumns: true)]
 public class SelectNProducts : ReadBenchmarkBase
 {
-    [Params(1000)] public int N { get; set; }
+    [Params(10, 100, 1000, 10000, 50000, 100000)]
+    public int N { get; set; }
 
     private static readonly Func<AppDbContext, int, IAsyncEnumerable<EfCoreModels.Product>> CompiledQuery =
         EF.CompileAsyncQuery((AppDbContext db, int n) => db.Products
@@ -48,7 +48,7 @@ public class SelectNProducts : ReadBenchmarkBase
         var products = await DapperConnection.QueryAsync<DapperModels.Product>(Sql, new { N });
         return products as List<DapperModels.Product>;
     }
-    
+
     [Benchmark]
     public async Task<List<DapperModels.Product>> Dapper_Unbuffered()
     {
@@ -60,7 +60,7 @@ public class SelectNProducts : ReadBenchmarkBase
             flags: CommandFlags.None));
         return products.ToList();
     }
-    
+
     [Benchmark]
     public async Task<List<DapperModels.Product>> Dapper_QueryUnbuffered()
     {

@@ -8,6 +8,9 @@ namespace DapperVsEntityFramework.SelectOne;
 [MemoryDiagnoser(displayGenColumns: true)]
 public class SelectOneProduct : ReadBenchmarkBase
 {
+    [Params(1, 10, 100, 1000)]
+    public int TableSize { get; set; }
+
     private static readonly Func<AppDbContext, Task<EfCoreModels.Product?>> CompiledQuery =
         EF.CompileAsyncQuery<AppDbContext, EfCoreModels.Product?>(c => c.Products
             .AsNoTracking()
@@ -43,7 +46,7 @@ public class SelectOneProduct : ReadBenchmarkBase
     protected override Task SetUpHookAsync()
     {
         return SeedDatabaseAsync(new SeedOptions(
-            ProductsCount: 1,
+            ProductsCount: TableSize,
             OrdersCount: 0));
     }
 }
