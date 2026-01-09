@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>DapperVsEntityFramework.SelectN.SelectNProductsWithFilter-20260103-142515</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.15.8, Windows 11 (10.0.26200.7462/25H2/2025Update/HudsonValley2)
+AMD Ryzen 7 6800H with Radeon Graphics 3.20GHz, 1 CPU, 16 logical and 8 physical cores
+.NET SDK 10.0.101
+  [Host]     : .NET 10.0.1 (10.0.1, 10.0.125.57005), X64 RyuJIT x86-64-v3
+  DefaultJob : .NET 10.0.1 (10.0.1, 10.0.125.57005), X64 RyuJIT x86-64-v3
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>Method   </th><th>N</th><th>Mean </th><th>Error</th><th>StdDev</th><th>Ratio</th><th>RatioSD</th><th>Gen0</th><th>Gen1</th><th>Allocated</th><th>Alloc Ratio</th>
+</tr>
+</thead><tbody><tr><td>EfCore</td><td>10</td><td>734.0 &mu;s</td><td>11.73 &mu;s</td><td>10.40 &mu;s</td><td>1.00</td><td>0.02</td><td>1.9531</td><td>-</td><td>19.36 KB</td><td>1.00</td>
+</tr><tr><td>EfCore_Compiled</td><td>10</td><td>678.4 &mu;s</td><td>4.59 &mu;s</td><td>3.84 &mu;s</td><td>0.92</td><td>0.01</td><td>0.9766</td><td>-</td><td>10.16 KB</td><td>0.53</td>
+</tr><tr><td>Dapper</td><td>10</td><td>658.7 &mu;s</td><td>8.69 &mu;s</td><td>7.71 &mu;s</td><td>0.90</td><td>0.02</td><td>-</td><td>-</td><td>7.11 KB</td><td>0.37</td>
+</tr><tr><td>EfCore</td><td>100</td><td>873.6 &mu;s</td><td>12.54 &mu;s</td><td>10.47 &mu;s</td><td>1.00</td><td>0.02</td><td>7.8125</td><td>-</td><td>71.6 KB</td><td>1.00</td>
+</tr><tr><td>EfCore_Compiled</td><td>100</td><td>835.2 &mu;s</td><td>9.80 &mu;s</td><td>8.69 &mu;s</td><td>0.96</td><td>0.01</td><td>5.8594</td><td>-</td><td>62.47 KB</td><td>0.87</td>
+</tr><tr><td>Dapper</td><td>100</td><td>800.3 &mu;s</td><td>6.99 &mu;s</td><td>5.84 &mu;s</td><td>0.92</td><td>0.01</td><td>5.8594</td><td>-</td><td>48.14 KB</td><td>0.67</td>
+</tr><tr><td>EfCore</td><td>1000</td><td>13,617.5 &mu;s</td><td>95.05 &mu;s</td><td>88.91 &mu;s</td><td>1.00</td><td>0.01</td><td>62.5000</td><td>31.2500</td><td>586.84 KB</td><td>1.00</td>
+</tr><tr><td>EfCore_Compiled</td><td>1000</td><td>13,552.7 &mu;s</td><td>56.62 &mu;s</td><td>47.28 &mu;s</td><td>1.00</td><td>0.01</td><td>62.5000</td><td>-</td><td>577.53 KB</td><td>0.98</td>
+</tr><tr><td>Dapper</td><td>1000</td><td>13,279.9 &mu;s</td><td>139.25 &mu;s</td><td>123.44 &mu;s</td><td>0.98</td><td>0.01</td><td>46.8750</td><td>15.6250</td><td>450.41 KB</td><td>0.77</td>
+</tr></tbody></table>
+</body>
+</html>
