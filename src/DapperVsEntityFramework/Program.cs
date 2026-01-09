@@ -1,21 +1,14 @@
 ﻿using BenchmarkDotNet.Running;
 using DapperVsEntityFramework.SelectN;
+using DapperVsEntityFramework.SelectOne;
 using DapperVsEntityFramework.UpdateOne;
-using Microsoft.EntityFrameworkCore;
 
+BenchmarkRunner.Run<SelectOneProduct>();
+BenchmarkRunner.Run<SelectOneProductWithFilter>();
+BenchmarkRunner.Run<SelectOneOrder>();
+BenchmarkRunner.Run<SelectNProducts>();
+BenchmarkRunner.Run<SelectNProductsWithFilter>();
+BenchmarkRunner.Run<SelectNOrders>();
+BenchmarkRunner.Run<SelectNProductsParallel>();
+BenchmarkRunner.Run<UpdateOneProductById>();
 BenchmarkRunner.Run<UpdateOneOrderById>();
-// var bench = new UpdateOneOrderById();
-//
-// try
-// {
-//     await bench.SetUpAsync();
-//     await bench.Dapper_Tailored_Update();
-//
-//     var orders = await bench.DbContext.Orders
-//         .Include(o => o.Items)
-//         .FirstOrDefaultAsync(o => o.Id == 1);
-// }
-// finally
-// {
-//     await bench.TearDownAsync();
-// }

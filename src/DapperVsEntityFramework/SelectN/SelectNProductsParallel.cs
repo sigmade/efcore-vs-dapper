@@ -10,9 +10,11 @@ namespace DapperVsEntityFramework.SelectN;
 [MemoryDiagnoser(displayGenColumns: true)]
 public class SelectNProductsParallel : ReadBenchmarkBase
 {
-    [Params(10_000)] public int N { get; set; }
+    [Params(10_000)]
+    public int N { get; set; }
 
-    [Params(128)] public int DegreeOfParallelism { get; set; }
+    [Params(32, 64, 128, 256, 512)]
+    public int DegreeOfParallelism { get; set; }
 
     private static readonly Func<AppDbContext, int, IAsyncEnumerable<EfCoreModels.Product>> CompiledQuery =
         EF.CompileAsyncQuery((AppDbContext db, int n) => db.Products

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>DapperVsEntityFramework.UpdateOne.UpdateOneProductById-20260103-171308</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.15.8, Windows 11 (10.0.26200.7462/25H2/2025Update/HudsonValley2)
+AMD Ryzen 7 6800H with Radeon Graphics 3.20GHz, 1 CPU, 16 logical and 8 physical cores
+.NET SDK 10.0.101
+  [Host]     : .NET 10.0.1 (10.0.1, 10.0.125.57005), X64 RyuJIT x86-64-v3
+  Job-CNUJVU : .NET 10.0.1 (10.0.1, 10.0.125.57005), X64 RyuJIT x86-64-v3
+</code></pre>
+<pre><code>InvocationCount=1  UnrollFactor=1  
+</code></pre>
+
+<table>
+<thead><tr><th>Method      </th><th>Mean</th><th>Error</th><th>StdDev</th><th>Median</th><th>Ratio</th><th>RatioSD</th><th>Allocated</th><th>Alloc Ratio</th>
+</tr>
+</thead><tbody><tr><td>EfCore</td><td>3.375 ms</td><td>0.1399 ms</td><td>0.4102 ms</td><td>3.283 ms</td><td>1.01</td><td>0.17</td><td>89.32 KB</td><td>1.00</td>
+</tr><tr><td>EfCore_Attach_Hack</td><td>2.438 ms</td><td>0.1378 ms</td><td>0.4019 ms</td><td>2.316 ms</td><td>0.73</td><td>0.15</td><td>77.51 KB</td><td>0.87</td>
+</tr><tr><td>Dapper</td><td>2.307 ms</td><td>0.0585 ms</td><td>0.1650 ms</td><td>2.280 ms</td><td>0.69</td><td>0.09</td><td>21.85 KB</td><td>0.24</td>
+</tr></tbody></table>
+</body>
+</html>

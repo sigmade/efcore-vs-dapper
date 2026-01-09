@@ -10,7 +10,11 @@ namespace DapperVsEntityFramework.SelectN;
 [MemoryDiagnoser(displayGenColumns: true)]
 public class SelectNOrders : ReadBenchmarkBase
 {
-    [Params(10, 100, 1000)] public int N { get; set; }
+    [Params(10, 100, 1000)]
+    public int N { get; set; }
+
+    [Params(1, 5, 10, 20)]
+    public int ItemsPerOrder { get; set; }
 
     private static readonly Func<AppDbContext, int, IAsyncEnumerable<EfCoreModels.Order>> CompiledQuery =
         EF.CompileAsyncQuery((AppDbContext db, int n) => db.Orders
@@ -101,9 +105,9 @@ public class SelectNOrders : ReadBenchmarkBase
     protected override Task SetUpHookAsync()
     {
         return SeedDatabaseAsync(new SeedOptions(
-            ProductsCount: 5000,
+            ProductsCount: Math.Max(5000, ItemsPerOrder * 1000),
             OrdersCount: 2000,
-            MinItemsPerOrder: 1,
-            MaxItemsPerOrder: 5));
+            MinItemsPerOrder: ItemsPerOrder,
+            MaxItemsPerOrder: ItemsPerOrder));
     }
 }
